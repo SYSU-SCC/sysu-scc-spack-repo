@@ -1,6 +1,6 @@
 git clone \
     -c feature.manyFiles=true \
-    -b releases/latest \
+    -b v0.21.0 \
     --depth=1 \
     https://github.com/spack/spack \
     $(dirname $SCC_SETUP_ENV)/../../../spack
