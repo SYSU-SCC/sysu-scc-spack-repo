@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.4
-FROM debian:bookworm-slim
+FROM debian:bullseye-slim
 ARG SCC_OPT=/opt
 WORKDIR ${SCC_OPT}
 COPY . sysu-scc-spack-repo
@@ -8,7 +8,7 @@ RUN <<EOF
 apt-get update -y
 apt-get upgrade -y
 apt-get install --no-install-recommends -y \
-    clang-14 python3 \
+    clang-11 python3 \
     make patch bash \
     tar gzip unzip bzip2 xz-utils \
     file git ca-certificates
