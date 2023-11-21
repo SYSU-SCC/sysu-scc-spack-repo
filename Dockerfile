@@ -15,5 +15,5 @@ apt-get install --no-install-recommends -y \
 apt-get autoremove -y
 apt-get clean -y
 rm -rf /var/lib/apt/lists/*
-sh $(dirname $SCC_SETUP_ENV)/init-env.sh
+bash $(dirname $SCC_SETUP_ENV)/init-env.sh
 EOF
