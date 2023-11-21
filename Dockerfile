@@ -9,9 +9,9 @@ apt-get update -y
 apt-get upgrade -y
 apt-get install --no-install-recommends -y \
     clang-11 python3 \
-    patch bash lsb-release \
+    patch bash make \
     tar gzip unzip bzip2 xz-utils \
-    file git ca-certificates
+    file git
 apt-get autoremove -y
 apt-get clean -y
 rm -rf /var/lib/apt/lists/*
