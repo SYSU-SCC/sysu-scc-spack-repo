@@ -26,7 +26,7 @@ git clone https://github.com/SYSU-SCC/sysu-scc-spack-repo
 export SCC_SETUP_ENV=$(realpath sysu-scc-spack-repo/share/sysu-scc-spack-repo/setup-env.sh)
 
 # 初始化
-sh $(dirname $SCC_SETUP_ENV)/init-env.sh
+bash $(dirname $SCC_SETUP_ENV)/init-env.sh
 
 # 后续每次只需要执行这一句即可使用配好的环境
 . $SCC_SETUP_ENV
