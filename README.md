@@ -68,6 +68,33 @@ docker run \
 spack find
 ```
 
+### 起一个 vscode code tunner ！
+
+```bash
+docker run --detach \
+    --name your-container-tunnel \
+    --volume your-workspace-volume:/workspace \
+    --workdir /workspace \
+    wukan0621/sccenv:latest \
+    code tunnel --accept-server-license-terms
+docker logs -n 50 your-container-tunnel
+```
+
+输出类似于这样
+
+```bash
+*
+* Visual Studio Code Server
+*
+* By using the software, you agree to
+* the Visual Studio Code Server License Terms (https://aka.ms/vscode-server-license) and
+* the Microsoft Privacy Statement (https://privacy.microsoft.com/en-US/privacystatement).
+*
+To grant access to the server, please log into https://github.com/login/device and use code ****-****
+```
+
+访问那个链接并且输入那个 code 即可。
+
 ## License
 
 This project is part of Spack. Spack is distributed under the terms of both the
