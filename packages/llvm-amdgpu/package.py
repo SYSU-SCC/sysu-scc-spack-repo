@@ -331,7 +331,7 @@ class LlvmAmdgpu(CMakePackage):
         if self.spec.satisfies("@5.0.0:"):
             llvm_runtimes.append("libcxx")
             llvm_runtimes.append("libcxxabi")
-            args.append(self.tagsdefine("LLVM_TARGETS_TO_BUILD", get_llvm_targets_to_build(spec)))
+            args.append(self.define("LLVM_TARGETS_TO_BUILD", get_llvm_targets_to_build(spec)))
             args.append(self.define("LLVM_AMDGPU_ALLOW_NPI_TARGETS", "ON"))
             args.extend([self.define("LLVM_ENABLE_RUNTIMES", ";".join(llvm_runtimes))])
         if "+openmp" in self.spec:
