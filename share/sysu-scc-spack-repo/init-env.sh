@@ -1,17 +1,12 @@
 git clone \
     -c feature.manyFiles=true \
-    -b v0.21.0 \
+    -b $1 \
     --depth=1 \
     https://github.com/spack/spack \
     $(dirname $SCC_SETUP_ENV)/../../../spack
 rm -rf $(dirname $SCC_SETUP_ENV)/../../../spack/.git
 . $SCC_SETUP_ENV
-spack mirror add v0.21.0 https://binaries.spack.io/v0.21.0
+spack mirror add $1 https://binaries.spack.io/$1
 spack buildcache keys --install --trust
 spack repo add --scope=site $(dirname $SCC_SETUP_ENV)/../..
 spack compiler add --scope=site
-spack install --fail-fast -y ${SCC_DEFAULT_COMPILER} target=$(arch) &&
-    spack gc -y
-spack compiler add --scope=site $(spack location -i ${SCC_DEFAULT_COMPILER})
-spack config --scope=site add "packages:all:compiler:[${SCC_DEFAULT_COMPILER}]"
-spack clean -ab

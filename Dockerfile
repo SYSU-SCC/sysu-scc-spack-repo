@@ -15,5 +15,6 @@ apt-get install --no-install-recommends -y \
 apt-get autoremove -y
 apt-get clean -y
 rm -rf /var/lib/apt/lists/*
-bash $(dirname $SCC_SETUP_ENV)/init-env.sh
+bash $(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.0
+bash $(dirname $SCC_SETUP_ENV)/init-default-compiler.sh gcc@7.5.0 gcc@7.5.0
 EOF
