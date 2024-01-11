@@ -19,14 +19,10 @@ class Antlr4CppRuntime(CMakePackage):
 
     def cmake_args(self):
         args = [
-            self.define("ANTLR_BUILD_CPP_TESTS", "OFF"),
+            self.define("ANTLR4_INSTALL", "On"),
+            self.define("ANTLR_BUILD_CPP_TESTS", "Off"),
             self.define("WITH_DEMO", "Off"),
             self.define("WITH_LIBCXX", "Off"),
-            self.define("WITH_STATIC_CRT", "Off"),
+            self.define("WITH_STATIC_CRT", "Off")
         ]
         return args
-
-    def install(self, spec, prefix):
-        super().install(spec, prefix)
-        mkdirp(join_path(prefix.lib, "cmake", "antlr4"))
-        install_tree("cmake", join_path(prefix.lib, "cmake", "antlr4"))
