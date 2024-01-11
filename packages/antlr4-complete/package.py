@@ -47,4 +47,6 @@ class Antlr4Complete(Package):
 
     def install(self, spec, prefix):
         mkdirp(prefix.bin)
-        install("*.jar", prefix.bin)
+        install("antlr-*-complete.jar", prefix.bin)
+        with working_dir(prefix.bin):
+            symlink("antlr-*-complete.jar", "antlr-complete.jar")
