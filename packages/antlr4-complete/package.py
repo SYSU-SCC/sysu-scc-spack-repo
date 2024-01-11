@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack import *
+import glob
 
 class Antlr4Complete(Package):
     """
@@ -43,10 +45,10 @@ class Antlr4Complete(Package):
         expand=False,
     )
 
-    depends_on("java", type="run")
+    depends_on("java@8:", type="run", when="@4.10:")
+    depends_on("java@7:", type="run", when="@:4.9.3")
 
     def install(self, spec, prefix):
         mkdirp(prefix.bin)
-        install("antlr-*-complete.jar", prefix.bin)
-        with working_dir(prefix.bin):
-            symlink("antlr-*-complete.jar", "antlr-complete.jar")
+        rename(glob.glob("antlr-*-complete.jar")[0], "antlr-complete.jar")
+        install("antlr-complete.jar", prefix.bin)
