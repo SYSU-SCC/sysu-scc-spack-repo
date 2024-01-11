@@ -21,6 +21,7 @@
 # ----------------------------------------------------------------------------
 
 from hashlib import sha256
+
 from spack import *
 
 
@@ -29,7 +30,7 @@ class MibenchConsumer(MakefilePackage):
 
     # FIXME: Add a proper url for your package's homepage here.
     homepage = "https://vhosts.eecs.umich.edu/mibench/"
-    url      = "https://vhosts.eecs.umich.edu/mibench/consumer.tar.gz"
+    url = "https://vhosts.eecs.umich.edu/mibench/consumer.tar.gz"
 
     # FIXME: Add a list of GitHub accounts to
     # notify when the package is updated.
@@ -37,35 +38,41 @@ class MibenchConsumer(MakefilePackage):
 
     # FIXME: Add proper versions and checksums here.
     # version('1.2.3', '0123456789abcdef0123456789abcdef')
-    version('1.0', sha256='86d76a66fa567953c7b814a6c6e816c6af0afab59610160acb8036899d03d1f9')
+    version("1.0", sha256="86d76a66fa567953c7b814a6c6e816c6af0afab59610160acb8036899d03d1f9")
 
     # FIXME: Add dependencies if required.
-    depends_on('libmad', type='run')
-    depends_on('libtiff', type='run')
-    depends_on('lame', type='run')
+    depends_on("libmad", type="run")
+    depends_on("libtiff", type="run")
+    depends_on("lame", type="run")
 
     def edit(self, spec, prefix):
         # FIXME: Edit the Makefile if necessary
         # FIXME: If not needed delete this function
-        makefiles = ['./jpeg/jpeg-6a/Makefile', './lame/lame3.70/Makefile', './typeset/lout-3.24/Makefile']
+        makefiles = [
+            "./jpeg/jpeg-6a/Makefile",
+            "./lame/lame3.70/Makefile",
+            "./typeset/lout-3.24/Makefile",
+        ]
         for mf in makefiles:
             makefile = FileFilter(mf)
-            makefile.filter('gcc', "cc -Wl,--emit-relocs")
-            makefile.filter('-static', "")
-            makefile.filter('-lncurses', "")
-            makefile.filter('-DBRHIST', "")
-        
-        with open('Makefile', 'w') as mf:
-            mf.write("""
+            makefile.filter("gcc", "cc -Wl,--emit-relocs")
+            makefile.filter("-static", "")
+            makefile.filter("-lncurses", "")
+            makefile.filter("-DBRHIST", "")
+
+        with open("Makefile", "w") as mf:
+            mf.write(
+                """
 all:
 	make -C jpeg/jpeg-6a
 	make -C typeset/lout-3.24
-""")
-    
+"""
+            )
+
     def install(self, spec, prefix):
         mkdirp(prefix.bin)
-        bins = ['jpeg/jpeg-6a/cjpeg','jpeg/jpeg-6a/djpeg','typeset/lout-3.24/lout']
+        bins = ["jpeg/jpeg-6a/cjpeg", "jpeg/jpeg-6a/djpeg", "typeset/lout-3.24/lout"]
         for b in bins:
             install(b, prefix.bin)
-        mkdirp(join_path(prefix, 'data'))
-        install_tree('.', join_path(prefix, 'data'))
+        mkdirp(join_path(prefix, "data"))
+        install_tree(".", join_path(prefix, "data"))

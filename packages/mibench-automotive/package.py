@@ -21,6 +21,7 @@
 # ----------------------------------------------------------------------------
 
 from hashlib import sha256
+
 from spack import *
 
 
@@ -29,7 +30,7 @@ class MibenchAutomotive(MakefilePackage):
 
     # FIXME: Add a proper url for your package's homepage here.
     homepage = "https://vhosts.eecs.umich.edu/mibench/"
-    url      = "https://vhosts.eecs.umich.edu/mibench/automotive.tar.gz"
+    url = "https://vhosts.eecs.umich.edu/mibench/automotive.tar.gz"
 
     # FIXME: Add a list of GitHub accounts to
     # notify when the package is updated.
@@ -37,35 +38,46 @@ class MibenchAutomotive(MakefilePackage):
 
     # FIXME: Add proper versions and checksums here.
     # version('1.2.3', '0123456789abcdef0123456789abcdef')
-    version('1.0', sha256='d63e8dc1f15d93d1b7ee59aed4dfb38659cb78819ce94bd26f8ceaf4d149fad9')
+    version("1.0", sha256="d63e8dc1f15d93d1b7ee59aed4dfb38659cb78819ce94bd26f8ceaf4d149fad9")
 
     # FIXME: Add dependencies if required.
 
     def edit(self, spec, prefix):
         # FIXME: Edit the Makefile if necessary
         # FIXME: If not needed delete this function
-        makefiles = ['./basicmath/Makefile',
-            './bitcount/Makefile',
-            './qsort/Makefile',
-            './susan/Makefile']
+        makefiles = [
+            "./basicmath/Makefile",
+            "./bitcount/Makefile",
+            "./qsort/Makefile",
+            "./susan/Makefile",
+        ]
         for mf in makefiles:
             makefile = FileFilter(mf)
-            makefile.filter('gcc', "cc -Wl,--emit-relocs")
-            makefile.filter('-static', "")
-        
-        with open('Makefile', 'w') as mf:
-            mf.write("""
+            makefile.filter("gcc", "cc -Wl,--emit-relocs")
+            makefile.filter("-static", "")
+
+        with open("Makefile", "w") as mf:
+            mf.write(
+                """
 all:
 	make -C basicmath
 	make -C bitcount
 	make -C qsort
 	make -C susan
-""")
-    
+"""
+            )
+
     def install(self, spec, prefix):
         mkdirp(prefix.bin)
-        bins = ['basicmath/basicmath_small', 'basicmath/basicmath_large', 'bitcount/bitcnts', 'qsort/qsort_small', 'qsort/qsort_large', 'susan/susan']
+        bins = [
+            "basicmath/basicmath_small",
+            "basicmath/basicmath_large",
+            "bitcount/bitcnts",
+            "qsort/qsort_small",
+            "qsort/qsort_large",
+            "susan/susan",
+        ]
         for b in bins:
             install(b, prefix.bin)
-        mkdirp(join_path(prefix, 'data'))
-        install_tree('.', join_path(prefix, 'data'))
+        mkdirp(join_path(prefix, "data"))
+        install_tree(".", join_path(prefix, "data"))

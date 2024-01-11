@@ -8,55 +8,63 @@ from spack import *
 
 class Rodinia(MakefilePackage, CudaPackage):
     """Rodinia: Accelerating Compute-Intensive Applications with
-       Accelerators"""
+    Accelerators"""
 
     homepage = "https://rodinia.cs.virginia.edu/doku.php"
-    url      = "https://www.cs.virginia.edu/~kw5na/lava/Rodinia/Packages/Current/rodinia_3.1.tar.bz2"
+    url = "https://www.cs.virginia.edu/~kw5na/lava/Rodinia/Packages/Current/rodinia_3.1.tar.bz2"
 
-    version('3.1', sha256='faebac7c11ed8f8fcf6bf2d7e85c3086fc2d11f72204d6dfc28dc5b2e8f2acfd')
+    version("3.1", sha256="faebac7c11ed8f8fcf6bf2d7e85c3086fc2d11f72204d6dfc28dc5b2e8f2acfd")
 
-    depends_on('cuda')
-    depends_on('freeglut')
-    depends_on('glew')
-    depends_on('gl')
-    depends_on('glu')
+    depends_on("cuda")
+    depends_on("freeglut")
+    depends_on("glew")
+    depends_on("gl")
+    depends_on("glu")
 
-    conflicts('~cuda')
+    conflicts("~cuda")
 
-    build_targets = ['CUDA']
+    build_targets = ["CUDA"]
 
     variant(
-        'cudart',
-        default='default',
-        description='build with nvcc --cudart shared to be used with gpgpu-sim',
-        values=('default','shared', 'static', 'none'),
-        multi=False
+        "cudart",
+        default="default",
+        description="build with nvcc --cudart shared to be used with gpgpu-sim",
+        values=("default", "shared", "static", "none"),
+        multi=False,
     )
 
     def edit(self, spec, prefix):
         # set cuda paths
-        filter_file('CUDA_DIR = /usr/local/cuda',
-                    'CUDA_DIR = {0}'.format(self.spec['cuda'].prefix),
-                    'common/make.config', string=True)
+        filter_file(
+            "CUDA_DIR = /usr/local/cuda",
+            "CUDA_DIR = {0}".format(self.spec["cuda"].prefix),
+            "common/make.config",
+            string=True,
+        )
 
-        filter_file('SDK_DIR = /usr/local/cuda-5.5/samples/',
-                    'SDK_DIR = {0}/samples'.format(self.spec['cuda'].prefix),
-                    'common/make.config', string=True)
+        filter_file(
+            "SDK_DIR = /usr/local/cuda-5.5/samples/",
+            "SDK_DIR = {0}/samples".format(self.spec["cuda"].prefix),
+            "common/make.config",
+            string=True,
+        )
 
-        filter_file('nvcc',
-                    'nvcc -I../hybridsort', # fix helper_cuda.h
-                    'cuda/cfd/Makefile', string=True)
+        filter_file(
+            "nvcc", "nvcc -I../hybridsort", "cuda/cfd/Makefile", string=True  # fix helper_cuda.h
+        )
 
         # fix broken makefile rule
-        filter_file('%.o: %.[ch]', '%.o: %.c',
-                    'cuda/kmeans/Makefile', string=True)
+        filter_file("%.o: %.[ch]", "%.o: %.c", "cuda/kmeans/Makefile", string=True)
 
         # fix missing include for lseek(), read()
-        filter_file('#include <stdint.h>',
-                    '#include <stdint.h>\n#include <unistd.h>',
-                    'cuda/mummergpu/src/suffix-tree.cpp', string=True)
+        filter_file(
+            "#include <stdint.h>",
+            "#include <stdint.h>\n#include <unistd.h>",
+            "cuda/mummergpu/src/suffix-tree.cpp",
+            string=True,
+        )
 
-        makefiles = [ # find . -name *akefile
+        makefiles = [  # find . -name *akefile
             "common/common.mk",
             "cuda/huffman/Makefile",
             "cuda/heartwall/AVI/makefile",
@@ -179,19 +187,24 @@ class Rodinia(MakefilePackage, CudaPackage):
         ]
 
         for makefile in makefiles:
-            filter_file('-arch sm_[0-9]+', '', makefile)
-            filter_file('-arch=sm_[0-9]+', '', makefile)
-            filter_file('--gpu-name sm_[0-9]+', '', makefile)
-            filter_file('--gpu-architecture=compute_[0-9]+', '', makefile)
-            filter_file('--gpu-code=compute_[0-9]+', '', makefile)
+            filter_file("-arch sm_[0-9]+", "", makefile)
+            filter_file("-arch=sm_[0-9]+", "", makefile)
+            filter_file("--gpu-name sm_[0-9]+", "", makefile)
+            filter_file("--gpu-architecture=compute_[0-9]+", "", makefile)
+            filter_file("--gpu-code=compute_[0-9]+", "", makefile)
             filter_file(
-                'nvcc',
-                'nvcc -arch=sm_{0}'.format(spec.variants['cuda_arch'].value[0]) + ('' if 'cudart=default' in self.spec else ' --cudart '+spec.variants['cudart'].value),
-                makefile)
-                
+                "nvcc",
+                "nvcc -arch=sm_{0}".format(spec.variants["cuda_arch"].value[0])
+                + (
+                    ""
+                    if "cudart=default" in self.spec
+                    else " --cudart " + spec.variants["cudart"].value
+                ),
+                makefile,
+            )
 
     def install(self, spec, prefix):
         mkdirp(prefix.bin)
-        install_tree('bin/linux/cuda', prefix.bin)
-        mkdirp(join_path(prefix, 'data'))
-        install_tree('data', join_path(prefix, 'data'))
+        install_tree("bin/linux/cuda", prefix.bin)
+        mkdirp(join_path(prefix, "data"))
+        install_tree("data", join_path(prefix, "data"))
