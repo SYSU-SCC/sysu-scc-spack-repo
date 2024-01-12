@@ -3,12 +3,16 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-from spack import *
 import glob
+
+from spack.package import *
+
 
 class Antlr4Complete(Package):
     """
-    This package provides complete ANTLR tool, Java runtime and ST, which lets you run the tool and the generated code by version 4 of ANTLR (ANother Tool for Language Recognition).
+    This package provides complete ANTLR tool, Java runtime and ST,
+    which lets you run the tool and the generated code by
+    version 4 of ANTLR (ANother Tool for Language Recognition).
     """
 
     homepage = "https://www.antlr.org"
@@ -45,10 +49,15 @@ class Antlr4Complete(Package):
         expand=False,
     )
 
-    depends_on("java@8:", type="run", when="@4.10:")
-    depends_on("java@7:", type="run", when="@:4.9.3")
+    depends_on("java@8.0:", type="run", when="@4.10.0:")
+    depends_on("java@7.0:", type="run", when="@:4.9.3")
 
     def install(self, spec, prefix):
         mkdirp(prefix.bin)
         rename(glob.glob("antlr-*-complete.jar")[0], "antlr-complete.jar")
         install("antlr-complete.jar", prefix.bin)
+
+    def setup_run_environment(self, env):
+        env.set("ANTLR4_JAR_LOCATION", join_path(self.prefix.bin, "antlr-complete.jar"))
+        env.set("ANTLR_JAR_LOCATION", join_path(self.prefix.bin, "antlr-complete.jar"))
+        env.set("ANTLR_EXECUTABLE", join_path(self.prefix.bin, "antlr-complete.jar"))
