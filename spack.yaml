@@ -1,3 +1,3 @@
 spack:
   specs:
-    - py-vl-convert-python # for test
+    - gmake # for test
