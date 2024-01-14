@@ -20,7 +20,7 @@
 最小化配置一个可以使用的 spack，需要的软件依赖可以参考 [Dockerfile](./Dockerfile)。
 
 ```bash
-git clone https://github.com/SYSU-SCC/sysu-scc-spack-repo
+git clone https://github.com/SYSU-SCC/sysu-scc-spack-repo --depth=1
 
 # 只依赖这一个环境变量，可以放进 ~/.bashrc
 export SCC_SETUP_ENV=$(realpath sysu-scc-spack-repo/share/sysu-scc-spack-repo/setup-env.sh)
