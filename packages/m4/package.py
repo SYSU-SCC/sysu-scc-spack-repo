@@ -60,7 +60,7 @@ class M4(AutotoolsPackage, GNUMirrorPackage):
         conflicts("~compiler-rt %cce@9:", when="platform=" + plat)
         conflicts("~compiler-rt %clang@:13", when="platform=" + plat)
         conflicts("~compiler-rt %aocc", when="platform=" + plat)
-        conflicts("~compiler-rt %arm:", when="platform=" + plat)
+        conflicts("~compiler-rt %arm", when="platform=" + plat)
         conflicts("~compiler-rt %fj", when="platform=" + plat)
 
     depends_on("diffutils", type="build")
