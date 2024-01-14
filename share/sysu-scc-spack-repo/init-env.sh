@@ -1,10 +1,4 @@
-git clone \
-    -c feature.manyFiles=true \
-    -b $1 \
-    --depth=1 \
-    https://github.com/spack/spack \
-    $(dirname $SCC_SETUP_ENV)/../../../spack
-rm -rf $(dirname $SCC_SETUP_ENV)/../../../spack/.git
+python3 -c "import tarfile;from urllib.request import urlopen;tarfile.open(fileobj=urlopen(https://github.com/spack/spack/archive/refs/tags/$1.tar.gz)).extractall('$(dirname $SCC_SETUP_ENV)/../../../spack')"
 . $SCC_SETUP_ENV
 spack mirror add $1 https://binaries.spack.io/$1
 spack buildcache keys --install --trust
