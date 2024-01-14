@@ -9,7 +9,7 @@ RUN <<EOF
 apt-get update -y
 apt-get upgrade -y
 apt-get install --no-install-recommends -y \
-    python3 patch \
+    python3 patch tar gzip bzip2 xz-utils \
     file ca-certificates make bash clang-17
 apt-get autoremove -y
 apt-get clean -y

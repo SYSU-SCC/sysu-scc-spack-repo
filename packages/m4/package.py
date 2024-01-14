@@ -50,18 +50,18 @@ class M4(AutotoolsPackage, GNUMirrorPackage):
     variant("sigsegv", default=True, description="Build the libsigsegv dependency")
     variant("compiler-rt", default=False, description="Build with the compiler runtime library")
 
-    # See package apple-libunwind
+    # From package apple-libunwind
     # The 'conflicts' directive only accepts valid spack specs;
     # platforms cannot be negated -- 'platform!=darwin' is not a valid
     # spec -- so expressing a conflict for any platform that isn't
     # Darwin must be expressed by listing a conflict with every
     # platform that isn't Darwin/macOS
     for plat in ["linux", "cray"]:
-        conflicts("~compiler-rt %cce@9:", when="platform=" + plat)
-        conflicts("~compiler-rt %clang@:13", when="platform=" + plat)
-        conflicts("~compiler-rt %aocc", when="platform=" + plat)
-        conflicts("~compiler-rt %arm", when="platform=" + plat)
-        conflicts("~compiler-rt %fj", when="platform=" + plat)
+        conflicts("@:1.4.18%clang@:11~compiler-rt", when="platform=" + plat)
+        conflicts("%aocc~compiler-rt ", when="platform=" + plat)
+        conflicts("%arm~compiler-rt ", when="platform=" + plat)
+        conflicts("%fj~compiler-rt ", when="platform=" + plat)
+        conflicts("%cce@9:~compiler-rt ", when="platform=" + plat)
 
     depends_on("diffutils", type="build")
     depends_on("libsigsegv", when="+sigsegv")
