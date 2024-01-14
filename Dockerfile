@@ -15,8 +15,5 @@ apt-get clean -y
 rm -rf /var/lib/apt/lists/*
 bash $(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.1
 . ${SCC_SETUP_ENV}
-
-spack install --fail-fast -y py-vl-convert-python target=$(arch) && spack uninstall -a -y
-
 bash $(dirname $SCC_SETUP_ENV)/init-default-compiler.sh gcc@7.5.0 gcc@7.5.0
 EOF

@@ -1,4 +1,4 @@
-# Copyright 2013-2023 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2024 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -28,17 +28,17 @@ class PyAltair(PythonPackage):
     version("4.2.0", sha256="d87d9372e63b48cd96b2a6415f0cf9457f50162ab79dc7a31cd7e024dd840026")
 
     depends_on("python@3.7:", type=("build", "run"))
-    depends_on("py-setuptools@40.6:", type="build")
+    depends_on("py-setuptools@40.6:", type="build", when="@:4")
     depends_on("py-entrypoints", type=("build", "run"), when="@2.0.0:4")
 
     depends_on("py-hatchling", type=("build"), when="@5.0.0:")
-    depends_on("py-packaging", type=("build", "run"), when="@5.1.0:")
 
     depends_on("py-importlib-metadata", type=("build", "run"), when="@5.0.0:5.0")
-    depends_on("py-typing-extensions@4.0.1:", type=("build", "run"), when="@5.0.0:")
+    depends_on("py-typing-extensions@4.0.1:", type=("build", "run"), when="@5.0.0: ^python@:3.10")
+    depends_on("py-jinja2", type=("build", "run"))
     depends_on("py-jsonschema@3.0.0:", type=("build", "run"))
     depends_on("py-numpy", type=("build", "run"))
     depends_on("py-pandas@0.18:", type=("build", "run"))
     depends_on("py-pandas@0.25:", type=("build", "run"), when="@5.1.0:")
     depends_on("py-toolz", type=("build", "run"))
-    depends_on("py-jinja2", type=("build", "run"))
+    depends_on("py-packaging", type=("build", "run"), when="@5.1.0:")

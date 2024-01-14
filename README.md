@@ -2,7 +2,7 @@
 
 [Spack](https://spack.readthedocs.io/en/stable/repositories.html) package [repository](./packages) maintained by Student Cluster Competition Team @ Sun Yat-sen University.
 
-由中山大学超算队维护的 [spack](https://spack.readthedocs.io/en/stable/repositories.html) package [repository](./packages)；同时，我们也向上游提交了包括 cutlass（[spack#31379](https://github.com/spack/spack/pull/31379)）、py-altair（[spack#31386](https://github.com/spack/spack/pull/31386)）在内的 package，并已合并入主线。
+由中山大学超算队维护的 [spack](https://spack.readthedocs.io/en/stable/repositories.html) package [repository](./packages)；同时，我们也向上游提交了包括 [cutlass](https://github.com/spack/spack/pull/31379)、[py-altair](https://github.com/spack/spack/pull/31386)、[py-vl-convert-python](https://github.com/spack/spack/pull/42073)、[py-cairosvg](https://github.com/spack/spack/pull/42067)、[py-cssselect2](https://github.com/spack/spack/pull/42067)、[antlr4-cpp-runtime](https://github.com/spack/spack/pull/42048)、[antlr4-complete](https://github.com/spack/spack/pull/42048)在内的 package，并已合并入主线。
 
 同时提供了一个面向超算竞赛的[环境部署脚本](./sysu-scc-spack-repo/share/sysu-scc-spack-repo/init-env.sh)，旨在比赛期间快速构建一个可以使用的 spack 环境，其中包括：
 
@@ -26,7 +26,7 @@ git clone https://github.com/SYSU-SCC/sysu-scc-spack-repo
 export SCC_SETUP_ENV=$(realpath sysu-scc-spack-repo/share/sysu-scc-spack-repo/setup-env.sh)
 
 # 初始化
-bash $(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.0
+bash $(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.1
 
 # 后续每次只需要执行这一句即可使用配好的环境
 . $SCC_SETUP_ENV
@@ -70,33 +70,6 @@ docker run \
 . $SCC_SETUP_ENV
 spack find
 ```
-
-### 起一个 vscode code tunner ！
-
-```bash
-docker run --detach \
-    --name your-container-tunnel \
-    --volume your-workspace-volume:/workspace \
-    --workdir /workspace \
-    wukan0621/sccenv:latest \
-    code tunnel --accept-server-license-terms
-docker logs -n 50 your-container-tunnel
-```
-
-输出类似于这样
-
-```bash
-*
-* Visual Studio Code Server
-*
-* By using the software, you agree to
-* the Visual Studio Code Server License Terms (https://aka.ms/vscode-server-license) and
-* the Microsoft Privacy Statement (https://privacy.microsoft.com/en-US/privacystatement).
-*
-To grant access to the server, please log into https://github.com/login/device and use code ****-****
-```
-
-访问那个链接并且输入那个 code 即可。
 
 ## License
 
