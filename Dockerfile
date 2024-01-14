@@ -9,7 +9,7 @@ apt-get update -y
 apt-get upgrade -y
 apt-get install --no-install-recommends -y \
     python3 patch tar gzip unzip bzip2 xz-utils \
-    file git ca-certificates make bash clang-17 gcc g++
+    file git ca-certificates make bash clang-17
 apt-get autoremove -y
 apt-get clean -y
 rm -rf /var/lib/apt/lists/*
