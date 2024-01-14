@@ -1,5 +1,6 @@
 # syntax=docker/dockerfile:1.4
-FROM ubuntu:noble
+ARG BASE_IMAGE=debian:bookworm-slim
+FROM ${BASE_IMAGE}
 ARG SCC_OPT=/opt
 WORKDIR ${SCC_OPT}
 COPY . sysu-scc-spack-repo
@@ -9,7 +10,7 @@ apt-get update -y
 apt-get upgrade -y
 apt-get install --no-install-recommends -y \
     python3 patch tar gzip unzip bzip2 xz-utils \
-    file git ca-certificates make bash clang-17
+    file ca-certificates make bash clang-13
 apt-get autoremove -y
 apt-get clean -y
 rm -rf /var/lib/apt/lists/*
