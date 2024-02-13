@@ -98,7 +98,7 @@ class M4(AutotoolsPackage, GNUMirrorPackage):
             args.append("LDFLAGS=-rtlib=compiler-rt")
 
         if (
-            spec.satisfies("@:1.4.18%clang:11")
+            spec.satisfies("@:1.4.18%clang")
             or spec.satisfies("%aocc")
             or spec.satisfies("%arm")
             or spec.satisfies("%fj")
