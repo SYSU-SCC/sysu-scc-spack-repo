@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.4
-ARG BASE_IMAGE=debian:bookwork-slim # ubuntu:22.04
+ARG BASE_IMAGE=debian:bookworm-slim # ubuntu:22.04
 FROM ${BASE_IMAGE}
 ARG SCC_OPT=/opt
 WORKDIR ${SCC_OPT}
