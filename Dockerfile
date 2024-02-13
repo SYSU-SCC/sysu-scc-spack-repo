@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.4
-ARG BASE_IMAGE=ubuntu:22.04
+ARG BASE_IMAGE=debian:bookwork-slim # ubuntu:22.04
 FROM ${BASE_IMAGE}
 ARG SCC_OPT=/opt
 WORKDIR ${SCC_OPT}
@@ -10,7 +10,7 @@ apt-get update -y
 apt-get upgrade -y
 apt-get install --no-install-recommends -y \
     python3 patch tar gzip bzip2 xz-utils \
-    file ca-certificates make bash binutils libstdc++-11-dev
+    file ca-certificates make bash binutils libstdc++-12-dev
 apt-get autoremove -y
 apt-get clean -y
 rm -rf /var/lib/apt/lists/*
