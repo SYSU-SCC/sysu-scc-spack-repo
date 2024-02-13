@@ -10,7 +10,7 @@ apt-get update -y
 apt-get upgrade -y
 apt-get install --no-install-recommends -y \
     python3 patch tar gzip bzip2 xz-utils \
-    file ca-certificates make bash libc6 libstdc++6
+    file ca-certificates make bash libstdc++-dev
 apt-get autoremove -y
 apt-get clean -y
 rm -rf /var/lib/apt/lists/*
