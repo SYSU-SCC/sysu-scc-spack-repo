@@ -1,3 +1,3 @@
-spack install --fail-fast -y $1 target=$(arch) && spack gc -y && spack clean -ab
-spack compiler add --scope=site $(spack location -i $1)
-spack config --scope=site add "packages:all:compiler:[$2]"
+spack install --fail-fast --use-buildcache only -y gcc target=$(arch) && spack gc -y && spack clean -ab
+spack compiler add --scope=site $(spack location -i gcc)
+spack config --scope=site add "packages:all:compiler:[gcc]"
