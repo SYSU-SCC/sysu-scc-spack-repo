@@ -54,7 +54,7 @@ jobs:
           load: true
 
       - name: Run Tests
-        run: docker run --rm ${{ steps.meta.outputs.tags }} sh -c ". \$SCC_SETUP_ENV && spack env create sysu-scc \$(dirname \$SCC_SETUP_ENV)/../../spack.yaml && spack env activate -p sysu-scc && spack install -y target=\$(arch) && spack find"
+        run: docker run --rm ${{ steps.meta.outputs.tags }} sh -c ". \$SCC_SETUP_ENV && spack env create sysu-scc \$(dirname \$SCC_SETUP_ENV)/../../spack.yaml && spack env activate -p sysu-scc && spack install -y && spack find"
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
