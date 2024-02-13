@@ -4,6 +4,11 @@ rm -rf $(dirname $SCC_SETUP_ENV)/../../../spack-$1
 . $SCC_SETUP_ENV
 spack mirror add binaries-spack-io-$1 https://binaries.spack.io/$1
 spack mirror add E4S https://cache.e4s.io
+
+spack buildcache update-index --help
+echo ">>> _ <<<"
+spack buildcache update-index ./spack-cache
+
 spack buildcache keys --install --trust
 spack compiler add --scope=site
 spack repo add --scope=site $(dirname $SCC_SETUP_ENV)/../..
