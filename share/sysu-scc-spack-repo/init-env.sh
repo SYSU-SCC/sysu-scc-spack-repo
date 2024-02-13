@@ -2,10 +2,8 @@ python3 -c "from tarfile import open;from urllib.request import urlopen;open(mod
 mv $(dirname $SCC_SETUP_ENV)/../../../spack-$1/spack-* $(dirname $SCC_SETUP_ENV)/../../../spack
 rm -rf $(dirname $SCC_SETUP_ENV)/../../../spack-$1
 . $SCC_SETUP_ENV
-spack mirror add $1 https://binaries.spack.io/$1
-spack mirror add E4S https://cache.e4s.io
+spack mirror add $1 s3://spack-binaries/$1
 spack buildcache keys --install --trust
 spack buildcache update-index $1
-spack buildcache update-index E4S
 spack repo add --scope=site $(dirname $SCC_SETUP_ENV)/../..
 spack compiler add --scope=site
