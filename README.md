@@ -6,7 +6,7 @@
 
 同时提供了一个面向超算竞赛的[环境部署脚本](./sysu-scc-spack-repo/share/sysu-scc-spack-repo/init-env.sh)，旨在比赛期间快速构建一个可以使用的 spack 环境，其中包括：
 
-1. 从源码重新编译的旧版本 `gcc`（此处选择了 `gcc@7.5.0`，也可以在[这个文件](./share/sysu-scc-spack-repo/setup-env.sh)中修改对应的环境变量）。
+1. 从 spack 官方镜像下载一个预编译的编译器，重新源码自编译一遍作为默认编译器。
 2. 基于 [spack environments](https://spack.readthedocs.io/en/stable/environments.html) 快速安装必要的软件环境，例如 `mpi` 等。
    - 需要注意的是，此处的 [spack.yaml](./spack.yaml) 仅作为示例，并非中大超算队在比赛中使用的版本。可以参照 [spack 文档](https://spack.readthedocs.io/en/stable/environments.html#spack-yaml) 和 [spack-configs](https://github.com/spack/spack-configs)，打包符合实际需要的软件环境。
 3. 基于 [GitHub Actions](https://github.com/SYSU-SCC/sysu-scc-spack-repo/actions) 的构建测试，保障脚本的代码质量。
