@@ -33,9 +33,7 @@ bash $(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.1
 
 # 从 spack 官方镜像下载一个预编译的编译器，重新源码自编译一遍作为默认编译器
 # see <https://cache.spack.io/package/v0.21.1/gcc/specs/>
-# bash $(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "gcc@11.2.0 target=aarch64 os=amzn2" "gcc@11.2.0" "gcc@11.2.0"
-# bash $(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "gcc@11.2.0 target=neoverse_n1 os=amzn2" "gcc@11.2.0" "gcc@11.2.0"
-bash $(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "gcc@11.2.0 target=x86_64_v3 os=amzn2" "gcc@11.2.0" "gcc@11.2.0"
+bash $(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "gcc@12.3.0 target=x86_64_v3 os=22.04" "gcc@12.3.0" "gcc@12.3.0"
 ```
 
 ### 集成进已有的 spack 环境
