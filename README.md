@@ -20,10 +20,10 @@
 最小化配置一个可以使用的 spack，需要的软件依赖可以参考 [Dockerfile](./Dockerfile)。
 
 ```bash
-git clone https://github.com/SYSU-SCC/sysu-scc-spack-repo --depth=1
+python3 -c "from tarfile import open;from urllib.request import urlopen;open(mode='r|gz',fileobj=urlopen('https://github.com/SYSU-SCC/sysu-scc-spack-repo/archive/refs/heads/latest.tar.gz')).extractall()"
 
 # 只依赖这一个环境变量，可以放进 ~/.bashrc
-export SCC_SETUP_ENV=$(realpath sysu-scc-spack-repo/share/sysu-scc-spack-repo/setup-env.sh)
+export SCC_SETUP_ENV=$(realpath sysu-scc-spack-repo-latest/share/sysu-scc-spack-repo/setup-env.sh)
 
 # 初始化
 bash $(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.1
@@ -38,11 +38,11 @@ bash $(dirname $SCC_SETUP_ENV)/init-default-compiler.sh gcc@7.5.0 gcc@7.5.0
 ### 集成进已有的 spack 环境
 
 ```bash
-git clone https://github.com/SYSU-SCC/sysu-scc-spack-repo
-spack repo add --scope=site sysu-scc-spack-repo
+python3 -c "from tarfile import open;from urllib.request import urlopen;open(mode='r|gz',fileobj=urlopen('https://github.com/SYSU-SCC/sysu-scc-spack-repo/archive/refs/heads/latest.tar.gz')).extractall()"
+spack repo add --scope=site sysu-scc-spack-repo-latest
 
 # A Simple Test
-spack env create sysu-scc sysu-scc-spack-repo/spack.yaml
+spack env create sysu-scc sysu-scc-spack-repo-latest/spack.yaml
 spack env activate -p sysu-scc
 spack install
 spack env deactivate
