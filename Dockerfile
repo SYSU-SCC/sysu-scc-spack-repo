@@ -8,11 +8,11 @@ apt-get update -y
 apt-get upgrade -y
 apt-get install --no-install-recommends -y \
     python3 patch tar gzip bzip2 xz-utils \
-    file ca-certificates make bash binutils libstdc++-12-dev
+    file ca-certificates make binutils libstdc++-12-dev
 apt-get autoremove -y
 apt-get clean -y
 rm -rf /var/lib/apt/lists/*
-bash $(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.2
+$(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.2
 . ${SCC_SETUP_ENV}
-bash $(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0 target=$(arch)" "gcc@12.3.0"
+$(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0 target=$(arch)" "gcc@12.3.0"
 EOF

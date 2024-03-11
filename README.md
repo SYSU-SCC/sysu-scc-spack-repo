@@ -2,7 +2,7 @@
 
 [Spack](https://spack.readthedocs.io/en/stable/repositories.html) package [repository](./packages) maintained by Student Cluster Competition Team @ Sun Yat-sen University.
 
-由中山大学超算队维护的 [spack](https://spack.readthedocs.io/en/stable/repositories.html) package [repository](./packages)；同时，我们也向上游提交了包括 [cutlass](https://github.com/spack/spack/pull/31379)、[py-altair](https://github.com/spack/spack/pull/31386)、[py-vl-convert-python](https://github.com/spack/spack/pull/42073)、[py-cairosvg](https://github.com/spack/spack/pull/42067)、[py-cssselect2](https://github.com/spack/spack/pull/42067)、[antlr4-cpp-runtime](https://github.com/spack/spack/pull/42048)、[antlr4-complete](https://github.com/spack/spack/pull/42048) 在内的 package，并已合并入主线。
+由中山大学超算队维护的 [spack](https://spack.readthedocs.io/en/stable/repositories.html) package [repository](./packages)；同时，我们也向上游提交了包括 [antlr4-complete](https://github.com/spack/spack/pull/42048)、[antlr4-cpp-runtime](https://github.com/spack/spack/pull/42048)、[cutlass](https://github.com/spack/spack/pull/31379)、[py-altair](https://github.com/spack/spack/pull/31386)、[py-vl-convert-python](https://github.com/spack/spack/pull/42073)、[py-cairosvg](https://github.com/spack/spack/pull/42067)、[py-cssselect2](https://github.com/spack/spack/pull/42067) 在内的 package，并已合并入主线。
 
 同时提供了一个面向超算竞赛的[环境部署脚本](./sysu-scc-spack-repo/share/sysu-scc-spack-repo/init-env.sh)，旨在比赛期间快速构建一个可以使用的 spack 环境，其中包括：
 
@@ -65,7 +65,7 @@ docker pull wukan0621/sccenv
 docker run \
   --name sccenv \
   -it wukan0621/sccenv \
-  bash
+  sh
 
 # 然后在 docker 中检查
 . $SCC_SETUP_ENV
