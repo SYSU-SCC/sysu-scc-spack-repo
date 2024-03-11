@@ -20,19 +20,19 @@
 最小化配置一个可以使用的 spack，需要的软件依赖可以参考 [Dockerfile](./Dockerfile)。
 
 ```bash
-python3 -c "from tarfile import open;from urllib.request import urlopen;open(mode='r|gz',fileobj=urlopen('https://github.com/SYSU-SCC/sysu-scc-spack-repo/archive/refs/heads/latest.tar.gz')).extractall()"
+python3 -c "from tarfile import open;from urllib.request import urlopen;open(mode='r|gz',fileobj=urlopen('https://github.com/SYSU-SCC/sysu-scc-spack-repo/archive/refs/tags/v0.21.2.12.3.0.12.20240311.tar.gz')).extractall()"
 
 # 只依赖这一个环境变量，可以放进 ~/.bashrc
-export SCC_SETUP_ENV=$(realpath sysu-scc-spack-repo-latest/share/sysu-scc-spack-repo/setup-env.sh)
+export SCC_SETUP_ENV=$(realpath sysu-scc-spack-repo-v0.21.2.12.3.0.12.20240311/share/sysu-scc-spack-repo/setup-env.sh)
 
 # 初始化
-$(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.1
+$(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.2
 
 # 后续每次只需要执行这一句即可使用配好的环境
 . $SCC_SETUP_ENV
 
 # 从 spack 官方镜像下载一个预编译的编译器，重新源码自编译一遍作为默认编译器
-# see <https://cache.spack.io/package/v0.21.1/gcc/specs/>
+# see <https://cache.spack.io/package/v0.21.2/gcc/specs/>
 $(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0" "gcc@12.3.0"
 ```
 
