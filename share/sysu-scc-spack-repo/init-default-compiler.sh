@@ -1,3 +1,4 @@
+#!/bin/sh
 spack buildcache install --otherarch "$1"
 spack compiler add --scope=site $(spack location -i "$1")
 spack install --fail-fast -y "$2" && spack gc -y && spack clean -ab

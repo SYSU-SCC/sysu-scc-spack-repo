@@ -26,14 +26,14 @@ python3 -c "from tarfile import open;from urllib.request import urlopen;open(mod
 export SCC_SETUP_ENV=$(realpath sysu-scc-spack-repo-latest/share/sysu-scc-spack-repo/setup-env.sh)
 
 # 初始化
-bash $(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.1
+$(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.1
 
 # 后续每次只需要执行这一句即可使用配好的环境
 . $SCC_SETUP_ENV
 
 # 从 spack 官方镜像下载一个预编译的编译器，重新源码自编译一遍作为默认编译器
 # see <https://cache.spack.io/package/v0.21.1/gcc/specs/>
-bash $(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0" "gcc@12.3.0"
+$(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0" "gcc@12.3.0"
 ```
 
 ### 集成进已有的 spack 环境
