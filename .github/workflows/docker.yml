@@ -54,7 +54,7 @@ jobs:
           load: true
 
       - name: Run Tests
-        uses: docker/build-push-action@v3
+        uses: addnab/docker-run-action@v3
         with:
           image: ${{ steps.meta.outputs.tags }}
           run: |
