@@ -14,5 +14,5 @@ apt-get clean -y
 rm -rf /var/lib/apt/lists/*
 $(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.2
 . ${SCC_SETUP_ENV}
-$(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0%gcc@12.3.0 target=$(arch)" "gcc@12.3.0"
+$(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "builtin.gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0%gcc@12.3.0 target=$(arch)" "gcc@12.3.0"
 EOF

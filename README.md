@@ -33,7 +33,7 @@ $(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.2
 
 # 从 spack 官方镜像下载一个预编译的编译器，重新源码自编译一遍作为默认编译器
 # see <https://cache.spack.io/package/v0.21.2/gcc/specs/>
-$(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0%gcc@12.3.0" "gcc@12.3.0"
+$(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "builtin.gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0%gcc@12.3.0" "gcc@12.3.0"
 ```
 
 ### 集成进已有的 spack 环境
