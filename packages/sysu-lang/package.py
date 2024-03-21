@@ -30,10 +30,10 @@ class SysuLang(CMakePackage):
 
     depends_on("flex", type="build")
     depends_on("bison", type="build")
-    depends_on("antlr4-complete", type=["build", "run"], when="@2404.0.0.20240115:")
+    depends_on("antlr4-complete", type=["build"], when="@2404.0.0.20240115:")
     depends_on("antlr4-cpp-runtime", type=["build", "run"], when="@2404.0.0.20240115:")
     depends_on("libuuid", type=["build", "link"], when="^antlr4-cpp-runtime@:4.10.1")
-    depends_on("llvm@11.0.0:+clang", type="link")
+    depends_on("llvm@11.0.0:+clang", type=["link", "run"])
     depends_on("python@3.8.0:", type="run")
 
     def cmake_args(self):
