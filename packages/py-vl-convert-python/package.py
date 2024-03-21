@@ -7,7 +7,7 @@ from spack.package import *
 
 
 class PyVlConvertPython(PythonPackage):
-    """Convert Vega-Lite chart specifications to SVG, PNG, or Vega"""
+    """Convert Vega-Lite chart specifications to SVG, PNG, PDF, or Vega"""
 
     homepage = "https://github.com/vega/vl-convert"
     pypi = "vl_convert_python/vl_convert_python-0.13.1.tar.gz"
