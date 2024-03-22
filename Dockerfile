@@ -17,8 +17,8 @@ apt-get clean -y
 rm -rf /var/lib/apt/lists/*
 $(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.2
 . ${SCC_SETUP_ENV}
-$(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "builtin.gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0%gcc@12.3.0+binutils target=${SCC_TARGET_ENV}" "gcc@12.3.0"
-spack install --fail-fast -y "python target=${SCC_TARGET_ENV} gmake target=${SCC_TARGET_ENV} ca-certificates-mozilla target=${SCC_TARGET_ENV}" && spack gc -y && spack clean -ab
+$(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "builtin.gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0%gcc@12.3.0+binutils target=\${SCC_TARGET_ENV}" "gcc@12.3.0"
+spack install --fail-fast -y "python target=\${SCC_TARGET_ENV} gmake target=\${SCC_TARGET_ENV} ca-certificates-mozilla target=\${SCC_TARGET_ENV}" && spack gc -y && spack clean -ab
 cp -r $(spack location -i --first python) $(dirname $SCC_SETUP_ENV)/../../../
 mv $(dirname $SCC_SETUP_ENV)/../../../python-* $(dirname $SCC_SETUP_ENV)/../../../python
 EOF
