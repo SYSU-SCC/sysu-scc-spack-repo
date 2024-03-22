@@ -58,18 +58,16 @@ cp $(spack location -i hpl-ai)/bin/HPL.dat HPL.dat
 OMP_NUM_THREADS=2 $(which mpirun) -n 4 xhpl_ai
 ```
 
-### 在 docker 中测试
+### 使用 docker 中预编译好的环境
 
 ```bash
-docker pull wukan0621/sccenv
 docker run \
   --name sccenv \
-  -it wukan0621/sccenv \
-  sh
+  wukan0621/sccenv
+docker cp sccenv:/root/opt .
+docker rm sccenv
 
-# 然后在 docker 中检查
-. $SCC_SETUP_ENV
-spack find
+export SCC_SETUP_ENV=$(realpath opt/sysu-scc-spack-repo-latest/share/sysu-scc-spack-repo/setup-env.sh)
 ```
 
 ## License
