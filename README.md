@@ -36,6 +36,23 @@ $(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.2
 $(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "builtin.gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0%gcc@12.3.0+binutils" "gcc@12.3.0"
 ```
 
+#### docker build
+
+需要的软件依赖可以参考 [Dockerfile](./Dockerfile)。
+
+```bash
+python3 -c "from tarfile import open;from urllib.request import urlopen;open(mode='r|gz',fileobj=urlopen('https://github.com/SYSU-SCC/sysu-scc-spack-repo/archive/refs/heads/latest.tar.gz')).extractall()"
+cd sysu-scc-spack-repo-latest
+docker build -t sccenvimage --build-arg SCC_OPT=$(realpath $(pwd)/..) .
+cd ..
+rm -rf sysu-scc-spack-repo-latest
+docker run --name sccenv sccenvimage
+docker cp sccenv:$(pwd)
+docker rm sccenv
+docker image rm sccenvimage
+export SCC_SETUP_ENV=$(realpath sysu-scc-spack-repo-latest/share/sysu-scc-spack-repo/setup-env.sh)
+```
+
 ### 集成进已有的 spack 环境
 
 ```bash
@@ -56,18 +73,6 @@ spack install sysu-scc.hpl-ai ^blaspp+openmp ^openblas threads=openmp ^mpich
 spack load hpl-ai
 cp $(spack location -i hpl-ai)/bin/HPL.dat HPL.dat
 OMP_NUM_THREADS=2 $(which mpirun) -n 4 xhpl_ai
-```
-
-### 使用 docker 中预编译好的环境
-
-```bash
-docker run \
-  --name sccenv \
-  wukan0621/sccenv
-docker cp sccenv:/root/opt .
-docker rm sccenv
-
-export SCC_SETUP_ENV=$(realpath opt/sysu-scc-spack-repo-latest/share/sysu-scc-spack-repo/setup-env.sh)
 ```
 
 ## License
