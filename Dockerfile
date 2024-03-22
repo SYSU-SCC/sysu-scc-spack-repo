@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1.4
 ARG BASE_IMAGE=debian:bookworm-slim
 ARG SCC_OPT=/root/opt
+ARG SCC_TARGET=x86_64
 FROM ${BASE_IMAGE} as builder
 COPY . ${SCC_OPT}/sysu-scc-spack-repo-latest
 ENV SCC_SETUP_ENV=${SCC_OPT}/sysu-scc-spack-repo-latest/share/sysu-scc-spack-repo/setup-env.sh
@@ -15,8 +16,8 @@ apt-get clean -y
 rm -rf /var/lib/apt/lists/*
 $(dirname $SCC_SETUP_ENV)/init-env.sh v0.21.2
 . ${SCC_SETUP_ENV}
-$(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "builtin.gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0%gcc@12.3.0+binutils target=$(arch)" "gcc@12.3.0"
-spack install --fail-fast -y "python target=$(arch) gmake target=$(arch) ca-certificates-mozilla target=$(arch)" && spack gc -y && spack clean -ab
+$(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "builtin.gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0%gcc@12.3.0+binutils target=$SCC_TARGET" "gcc@12.3.0"
+spack install --fail-fast -y "python target=$SCC_TARGET gmake target=$SCC_TARGET ca-certificates-mozilla target=$SCC_TARGET" && spack gc -y && spack clean -ab
 cp -r $(spack location -i --first python) $(dirname $SCC_SETUP_ENV)/../../../
 mv $(dirname $SCC_SETUP_ENV)/../../../python-* $(dirname $SCC_SETUP_ENV)/../../../python
 EOF
