@@ -3,7 +3,7 @@ ARG SCC_IMAGE=debian:bookworm-slim
 FROM ${SCC_IMAGE} as builder
 ARG SCC_TARGET=x86_64_v3
 ARG SCC_TAG=latest
-ARG SCC_OPT=/root/sccenv/${SCC_TAG}
+ARG SCC_OPT=/sccenv/${SCC_TAG}
 ARG SCC_SPACK_TAG=v0.21.2
 ENV SCC_SETUP_ENV=${SCC_OPT}/sysu-scc-spack-repo-${SCC_TAG}/share/sysu-scc-spack-repo/setup-env.sh
 COPY . ${SCC_OPT}/sysu-scc-spack-repo-${SCC_TAG}
@@ -26,7 +26,7 @@ cat >${SCC_SETUP_ENV} <<END
 #!/bin/sh
 export SPACK_ROOT=\$(dirname $SCC_SETUP_ENV)/../../../spack
 export SPACK_PYTHON=$(spack location -i python)/bin/python3
-. \$(dirname $SCC_SETUP_ENV)/../../../spack/share/spack/setup-env.sh
+. \$(dirname \$SCC_SETUP_ENV)/../../../spack/share/spack/setup-env.sh
 END
 cat ${SCC_SETUP_ENV}
 EOF
@@ -41,6 +41,6 @@ apt-get clean -y
 rm -rf /var/lib/apt/lists/*
 EOF
 ARG SCC_TAG=latest
-ARG SCC_OPT=/root/sccenv/${SCC_TAG}
+ARG SCC_OPT=/sccenv/${SCC_TAG}
 ENV SCC_SETUP_ENV=${SCC_OPT}/sysu-scc-spack-repo-${SCC_TAG}/share/sysu-scc-spack-repo/setup-env.sh
 COPY --from=builder ${SCC_OPT} ${SCC_OPT}

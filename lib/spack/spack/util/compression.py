@@ -57,9 +57,9 @@ def _untar(archive_file: str, remove_archive_file: bool = False) -> str:
         Can be one of .tar(.[gz|bz2|xz|Z]) or .(tgz|tbz|tbz2|txz).
     """
     try:
-        return _system_untar(archive_file, remove_archive_file)
-    except:
         return _py_untar(archive_file, remove_archive_file)
+    except:
+        return _system_untar(archive_file, remove_archive_file)
 
 
 def _py_untar(archive_file: str, remove_archive_file: bool = False) -> str:
