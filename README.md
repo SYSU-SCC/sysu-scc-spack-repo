@@ -15,11 +15,22 @@
 
 ## How to use
 
+### 使用预编译的环境
+
+```shell
+   docker run \
+   --name sccenv \
+   wukan0621/sccenv
+# 请提前将 sccenv 挂载到目标位置
+docker cp sccenv:/sccenv /
+docker rm sccenv
+```
+
 ### 从零开始
 
 最小化配置一个可以使用的 spack，需要的软件依赖可以参考 [Dockerfile](./Dockerfile)。
 
-```bash
+```shell
 python3 -c "from tarfile import open;from urllib.request import urlopen;open(mode='r|gz',fileobj=urlopen('https://github.com/SYSU-SCC/sysu-scc-spack-repo/archive/refs/tags/v0.21.2.12.3.0.12.20240311.tar.gz')).extractall()"
 
 # 只依赖这一个环境变量，可以放进 ~/.bashrc
@@ -38,7 +49,7 @@ $(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "builtin.gcc@12.3.0 target=x8
 
 ### 集成进已有的 spack 环境
 
-```bash
+```shell
 python3 -c "from tarfile import open;from urllib.request import urlopen;open(mode='r|gz',fileobj=urlopen('https://github.com/SYSU-SCC/sysu-scc-spack-repo/archive/refs/heads/latest.tar.gz')).extractall()"
 spack repo add --scope=site sysu-scc-spack-repo-latest
 
@@ -51,7 +62,7 @@ spack env deactivate
 
 ### 测试是否能用
 
-```bash
+```shell
 spack install sysu-scc.hpl-ai ^blaspp+openmp ^openblas threads=openmp ^mpich
 spack load hpl-ai
 cp $(spack location -i hpl-ai)/bin/HPL.dat HPL.dat

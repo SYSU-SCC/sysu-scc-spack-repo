@@ -49,6 +49,7 @@ jobs:
       - name: Build Docker image
         uses: docker/build-push-action@v3
         with:
+          build-args: SCC_TAG=${{ steps.meta.outputs.version }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           load: true
@@ -83,6 +84,7 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@v3
         with:
+          build-args: SCC_TAG=${{ steps.meta.outputs.version }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           push: ${{ github.event_name != 'pull_request' }}
