@@ -11,12 +11,13 @@ RUN <<EOF
 apt-get update -y
 apt-get upgrade -y
 apt-get install --no-install-recommends -y \
-  tar make binutils libc6-dev \
+  make binutils libc6-dev \
   python3 ca-certificates file patch
 apt-get autoremove -y
 apt-get clean -y
 rm -rf /var/lib/apt/lists/*
 $(dirname $SCC_SETUP_ENV)/init-env.sh ${SCC_SPACK_TAG}
+cp -r $(dirname $SCC_SETUP_ENV)/../../lib $(dirname $SCC_SETUP_ENV)/../../../spack
 . ${SCC_SETUP_ENV}
 spack config --scope=site add "packages:all:target:["${SCC_TARGET}"]"
 $(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "builtin.gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0%gcc@12.3.0" "gcc@12.3.0"
@@ -34,7 +35,7 @@ RUN <<EOF
 apt-get update -y
 apt-get upgrade -y
 apt-get install --no-install-recommends -y \
-  tar make binutils libc6-dev
+  make binutils libc6-dev
 apt-get autoremove -y
 apt-get clean -y
 rm -rf /var/lib/apt/lists/*
