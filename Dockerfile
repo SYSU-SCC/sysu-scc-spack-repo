@@ -11,7 +11,7 @@ RUN <<EOF
 apt-get update -y
 apt-get upgrade -y
 apt-get install --no-install-recommends -y \
-  tar gzip bzip2 xz-utils make binutils libc6-dev \
+  tar make binutils libc6-dev \
   python3 ca-certificates file patch
 apt-get autoremove -y
 apt-get clean -y
@@ -34,7 +34,7 @@ RUN <<EOF
 apt-get update -y
 apt-get upgrade -y
 apt-get install --no-install-recommends -y \
-  tar gzip bzip2 xz-utils make binutils libc6-dev
+  tar make binutils libc6-dev
 apt-get autoremove -y
 apt-get clean -y
 rm -rf /var/lib/apt/lists/*
