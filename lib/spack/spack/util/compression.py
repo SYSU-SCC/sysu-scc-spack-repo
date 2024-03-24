@@ -79,14 +79,7 @@ def _py_untar(archive_file: str, remove_archive_file: bool = False) -> str:
         # also have other extensions (on Unix) such as tgz, tbz2, ...
         archive_file = archive_file_no_ext + "-input"
         shutil.move(archive_file_no_ext, archive_file)
-    tar = which("tar", required=True)
-    # GNU tar's --no-same-owner is not as portable, -o works for BSD tar too. This flag is relevant
-    # when extracting archives as root, where tar attempts to set original ownership of files. This
-    # is redundant when distributing tarballs, as the tarballs are created on different systems
-    # than where they are extracted. In certain cases like rootless containers, setting original
-    # ownership is known to fail, so we need to disable it.
-    tar.add_default_arg("-oxf")
-    tar(archive_file)
+    tarfile.open(archive_file).extractall(path = outfile)
     if remove_archive_file:
         # remove input file to prevent two stage
         # extractions from being treated as exploding
