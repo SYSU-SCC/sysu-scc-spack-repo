@@ -60,7 +60,7 @@ jobs:
           image: ${{ steps.meta.outputs.tags }}
           run: |
             . $SCC_SETUP_ENV
-            spack install -y xz
+            spack install --fail-fast -y bash
             spack find
 
       # Login against a Docker registry except on PR

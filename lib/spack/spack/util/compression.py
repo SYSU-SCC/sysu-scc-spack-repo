@@ -154,10 +154,54 @@ try:
                     raise LinkOutsideDestinationError(member, target_path)
         return new_attrs
 
+    # Sentinel for replace() defaults, meaning "don't change the attribute"
+    _KEEP = object()
+
+    # https://github.com/python/cpython/blob/v3.12.2/Lib/tarfile.py#L926
+
+    def replace(
+        member,
+        *,
+        name=_KEEP,
+        mtime=_KEEP,
+        mode=_KEEP,
+        linkname=_KEEP,
+        uid=_KEEP,
+        gid=_KEEP,
+        uname=_KEEP,
+        gname=_KEEP,
+        deep=True,
+        _KEEP=_KEEP,
+    ):
+        """Return a deep copy of self with the given attributes replaced."""
+        import copy
+
+        if deep:
+            result = copy.deepcopy(member)
+        else:
+            result = copy.copy(member)
+        if name is not _KEEP:
+            result.name = name
+        if mtime is not _KEEP:
+            result.mtime = mtime
+        if mode is not _KEEP:
+            result.mode = mode
+        if linkname is not _KEEP:
+            result.linkname = linkname
+        if uid is not _KEEP:
+            result.uid = uid
+        if gid is not _KEEP:
+            result.gid = gid
+        if uname is not _KEEP:
+            result.uname = uname
+        if gname is not _KEEP:
+            result.gname = gname
+        return result
+
     def data_filter(member, dest_path):
         new_attrs = _get_filtered_attrs(member, dest_path, True)
         if new_attrs:
-            return member.replace(**new_attrs, deep=False)
+            return replace(member, **new_attrs, deep=False)
         return member
 
     _data_filter = getattr(tarfile, "data_filter", data_filter)
