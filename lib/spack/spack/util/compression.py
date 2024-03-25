@@ -88,10 +88,7 @@ def _py_untar(archive_file: str, remove_archive_file: bool = False) -> str:
         archive_file = archive_file_no_ext + "-input"
         shutil.move(archive_file_no_ext, archive_file)
     f_tar = tarfile.open(archive_file)
-    try:
-        f_tar.extractall(filter="data")
-    except Exception:
-        f_tar.extractall()
+    f_tar.extractall()
     f_tar.close()
     if remove_archive_file:
         # remove input file to prevent two stage
@@ -247,11 +244,7 @@ def _py_unzip(archive_file: str) -> str:
         archive_file = archive_file_no_ext + "-input"
         shutil.move(archive_file_no_ext, archive_file)
     f_zip = zipfile.ZipFile(archive_file)
-    try:
-        f_zip.extractall(filter="data")
-    except Exception:
-        f_zip.extractall()
-    f_zip.close()
+    f_zip.extractall()
     return outfile
 
 
