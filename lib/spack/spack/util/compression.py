@@ -198,13 +198,14 @@ try:
             result.gname = gname
         return result
 
-    def data_filter(member, dest_path):
-        new_attrs = _get_filtered_attrs(member, dest_path, True)
+    # python@:3.11 does not support data_filter, use tar_filter instead
+    def tar_filter(member, dest_path):
+        new_attrs = _get_filtered_attrs(member, dest_path, Fals)
         if new_attrs:
             return replace(member, **new_attrs, deep=False)
         return member
 
-    _data_filter = getattr(tarfile, "data_filter", data_filter)
+    _data_filter = getattr(tarfile, "data_filter", tar_filter)
 
 except ImportError:
     TARFILE_SUPPORTED = False
