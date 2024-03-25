@@ -241,7 +241,7 @@ def _py_untar(archive_file: str, remove_archive_file: bool = False) -> str:
         archive_file = archive_file_no_ext + "-input"
         shutil.move(archive_file_no_ext, archive_file)
     f_tar = tarfile.open(archive_file)
-    f_members = [_data_filter(member=m, dest_path=".") for m in f_tar.getmembers()]
+    f_members = [_data_filter(member=m, dest_path=outfile) for m in f_tar.getmembers()]
     f_tar.extractall(members=f_members)
     f_tar.close()
     if remove_archive_file:
