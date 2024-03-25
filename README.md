@@ -54,8 +54,8 @@ python3 -c "from tarfile import open;from urllib.request import urlopen;open(mod
 spack repo add --scope=site sysu-scc-spack-repo-latest
 
 # A Simple Test
-spack env create sysu-scc sysu-scc-spack-repo-latest/spack.yaml
-spack env activate -p sysu-scc
+spack env create sccenv sysu-scc-spack-repo-latest/spack.yaml
+spack env activate -p sccenv
 spack install
 spack env deactivate
 ```
@@ -63,7 +63,7 @@ spack env deactivate
 ### 测试是否能用
 
 ```shell
-spack install sysu-scc.hpl-ai ^blaspp+openmp ^openblas threads=openmp ^mpich
+spack install sccenv.hpl-ai ^blaspp+openmp ^openblas threads=openmp ^mpich
 spack load hpl-ai
 cp $(spack location -i hpl-ai)/bin/HPL.dat HPL.dat
 OMP_NUM_THREADS=2 $(which mpirun) -n 4 xhpl_ai

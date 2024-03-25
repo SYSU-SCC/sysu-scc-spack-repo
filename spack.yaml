@@ -1,3 +1,10 @@
 spack:
   specs:
-    - unzip # for test
+    - ca-certificates-mozilla
+    - glibc
+    - gmake
+    - binutils
+    - gcc+binutils
+    - python
+    - file
+    - patch

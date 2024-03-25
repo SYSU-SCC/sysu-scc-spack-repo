@@ -60,9 +60,7 @@ jobs:
           image: ${{ steps.meta.outputs.tags }}
           run: |
             . $SCC_SETUP_ENV
-            spack env create sysu-scc $(dirname $SCC_SETUP_ENV)/../../spack.yaml
-            spack env activate -p sysu-scc
-            spack install -y
+            spack install -y xz
             spack find
 
       # Login against a Docker registry except on PR
