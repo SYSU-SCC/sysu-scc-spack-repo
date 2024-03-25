@@ -23,7 +23,7 @@ spack config --scope=site add "packages:all:target:["${SCC_TARGET}"]"
 $(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "builtin.gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0%gcc@12.3.0+binutils" "gcc@12.3.0"
 spack env create sccenv $(dirname $SCC_SETUP_ENV)/../../spack.yaml
 spack env activate -p sccenv
-spack install --fail-fast -y
+spack install --fail-fast -y && spack gc -y && spack clean -ab
 cat >${SCC_SETUP_ENV} <<END
 #!/bin/sh
 export SPACK_ROOT=\$(dirname $SCC_SETUP_ENV)/../../../spack
