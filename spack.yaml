@@ -4,7 +4,6 @@ spack:
     - glibc
     - gmake
     - binutils
-    - gcc+binutils
     - python
     - file
     - patch
