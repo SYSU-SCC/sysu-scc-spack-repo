@@ -87,8 +87,11 @@ def _py_untar(archive_file: str, remove_archive_file: bool = False) -> str:
         # also have other extensions (on Unix) such as tgz, tbz2, ...
         archive_file = archive_file_no_ext + "-input"
         shutil.move(archive_file_no_ext, archive_file)
-    f_tar = tarfile.TarFile(archive_file)
-    f_tar.extractall()
+    f_tar = tarfile.open(archive_file)
+    try:
+        f_tar.extractall(filter="data")
+    except Exception:
+        f_tar.extractall()
     f_tar.close()
     if remove_archive_file:
         # remove input file to prevent two stage
@@ -244,7 +247,10 @@ def _py_unzip(archive_file: str) -> str:
         archive_file = archive_file_no_ext + "-input"
         shutil.move(archive_file_no_ext, archive_file)
     f_zip = zipfile.ZipFile(archive_file)
-    f_zip.extractall()
+    try:
+        f_zip.extractall(filter="data")
+    except Exception:
+        f_zip.extractall()
     f_zip.close()
     return outfile
 
