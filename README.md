@@ -31,10 +31,10 @@ docker rm sccenv
 最小化配置一个可以使用的 spack，需要的软件依赖可以参考 [Dockerfile](./Dockerfile)。
 
 ```shell
-python3 -c "from tarfile import open;from urllib.request import urlopen;open(mode='r|gz',fileobj=urlopen('https://github.com/SYSU-SCC/sysu-scc-spack-repo/archive/refs/tags/v0.22.0.12.3.0.12.20240326.tar.gz')).extractall()"
+python3 -c "from tarfile import open;from urllib.request import urlopen;open(mode='r|gz',fileobj=urlopen('https://github.com/SYSU-SCC/sysu-scc-spack-repo/archive/refs/tags/v0.22.0.12.3.0.12.20240514.tar.gz')).extractall()"
 
 # 只依赖这一个环境变量，可以放进 ~/.bashrc
-export SCC_SETUP_ENV=$(realpath sysu-scc-spack-repo-0.22.0.12.3.0.12.20240326/share/sysu-scc-spack-repo/setup-env.sh)
+export SCC_SETUP_ENV=$(realpath sysu-scc-spack-repo-0.22.0.12.3.0.12.20240514/share/sysu-scc-spack-repo/setup-env.sh)
 
 # 初始化
 $(dirname $SCC_SETUP_ENV)/init-env.sh v0.22.0
