@@ -48,12 +48,12 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           build-args: SCC_TAG=${{ steps.meta.outputs.version }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: test
           labels: ${{ steps.meta.outputs.labels }}
           load: true
 
       - name: Run Tests
-        run: docker run --rm ${{ env.IMAGE_NAME }}/${{ steps.meta.outputs.version }} ". \$SCC_SETUP_ENV && spack install --fail-fast -y bash && spack find"
+        run: docker run --rm test ". \$SCC_SETUP_ENV && spack install --fail-fast -y bash && spack find"
 
       # Login against a Docker registry except on PR
       - name: Log into registry ${{ env.REGISTRY }}
