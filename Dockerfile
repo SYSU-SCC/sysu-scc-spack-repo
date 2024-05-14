@@ -4,7 +4,7 @@ FROM ${SCC_IMAGE} as builder
 ARG SCC_TARGET=x86_64_v3
 ARG SCC_TAG=latest
 ARG SCC_OPT=/sccenv/${SCC_TAG}
-ARG SCC_SPACK_TAG=v0.21.2
+ARG SCC_SPACK_TAG=v0.22.0
 ENV SCC_SETUP_ENV=${SCC_OPT}/sysu-scc-spack-repo-${SCC_TAG}/share/sysu-scc-spack-repo/setup-env.sh
 COPY . ${SCC_OPT}/sysu-scc-spack-repo-${SCC_TAG}
 RUN <<EOF
