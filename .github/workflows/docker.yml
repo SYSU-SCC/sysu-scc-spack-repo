@@ -53,7 +53,7 @@ jobs:
           load: true
 
       - name: Run Tests
-        run: docker run --rm ${{ steps.meta.outputs.tags }} ". \$SCC_SETUP_ENV && spack install --fail-fast -y bash && spack find"
+        run: docker run --rm ${{ env.IMAGE_NAME }}/${{ steps.meta.outputs.version }} ". \$SCC_SETUP_ENV && spack install --fail-fast -y bash && spack find"
 
       # Login against a Docker registry except on PR
       - name: Log into registry ${{ env.REGISTRY }}
