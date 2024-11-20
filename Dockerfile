@@ -4,7 +4,7 @@ FROM ${SCC_IMAGE} as builder
 ARG SCC_TARGET=x86_64_v3
 ARG SCC_TAG=latest
 ARG SCC_OPT=/sccenv/${SCC_TAG}
-ARG SCC_SPACK_TAG=v0.22.1
+ARG SCC_SPACK_TAG=v0.23.0
 ENV SCC_SETUP_ENV=${SCC_OPT}/sysu-scc-spack-repo-${SCC_TAG}/share/sysu-scc-spack-repo/setup-env.sh
 COPY . ${SCC_OPT}/sysu-scc-spack-repo-${SCC_TAG}
 RUN <<EOF
@@ -20,7 +20,7 @@ $(dirname $SCC_SETUP_ENV)/init-env.sh ${SCC_SPACK_TAG}
 cp -r $(dirname $SCC_SETUP_ENV)/../../lib $(dirname $SCC_SETUP_ENV)/../../../spack
 . $(dirname $SCC_SETUP_ENV)/../../../spack/share/spack/setup-env.sh
 spack config --scope=site add "packages:all:target:["${SCC_TARGET}"]"
-$(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "builtin.gcc@13.2.0 target=x86_64_v3 os=ubuntu18.04" "gcc@13.2.0%gcc@13.2.0+binutils" "gcc@13.2.0"
+$(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "builtin.gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0%gcc@12.3.0+binutils" "gcc@12.3.0"
 spack env create sccenv $(dirname $SCC_SETUP_ENV)/../../spack.yaml
 spack env activate -p sccenv
 spack install --fail-fast -y && spack gc -y && spack clean -ab
