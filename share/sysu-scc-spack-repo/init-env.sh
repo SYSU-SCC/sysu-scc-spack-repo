@@ -3,7 +3,7 @@ python3 -c "from tarfile import open;from urllib.request import urlopen;open(mod
 mv $(dirname $SCC_SETUP_ENV)/../../../spack-$1/spack-* $(dirname $SCC_SETUP_ENV)/../../../spack
 rm -rf $(dirname $SCC_SETUP_ENV)/../../../spack-$1
 . $(dirname $SCC_SETUP_ENV)/../../../spack/share/spack/setup-env.sh
+spack config --scope site add "concretizer:targets:granularity:generic"
 spack mirror add --scope=site  $1 https://binaries.spack.io/$1
-spack mirror add --scope=site E4S https://cache.e4s.io
 spack buildcache keys --install --trust
 spack repo add --scope=site $(dirname $SCC_SETUP_ENV)/../..

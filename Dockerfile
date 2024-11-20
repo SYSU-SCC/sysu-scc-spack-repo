@@ -19,7 +19,8 @@ rm -rf /var/lib/apt/lists/*
 $(dirname $SCC_SETUP_ENV)/init-env.sh ${SCC_SPACK_TAG}
 cp -r $(dirname $SCC_SETUP_ENV)/../../lib $(dirname $SCC_SETUP_ENV)/../../../spack
 . $(dirname $SCC_SETUP_ENV)/../../../spack/share/spack/setup-env.sh
-spack config --scope=site add "packages:all:target:["${SCC_TARGET}"]"
+# Ensure generic targets for maximum matching with buildcaches
+spack config --scope site add "packages:all:require:["${SCC_TARGET}"]"
 $(dirname $SCC_SETUP_ENV)/init-default-compiler.sh "builtin.gcc@12.3.0 target=x86_64_v3 os=ubuntu22.04" "gcc@12.3.0%gcc@12.3.0+binutils" "gcc@12.3.0"
 spack env create sccenv $(dirname $SCC_SETUP_ENV)/../../spack.yaml
 spack env activate -p sccenv
