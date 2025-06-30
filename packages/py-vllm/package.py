@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+# from spack_repo.builtin.build_systems.cuda import CudaPackage
+# from spack_repo.builtin.build_systems.python import PythonPackage
 
 from spack.package import *
 
@@ -37,6 +39,8 @@ class PyVllm(PythonPackage, CudaPackage):
 
     depends_on("py-torch+custom-protobuf", type=["build", "run"])
     depends_on("py-torch@2.6.0", type=["build", "run"], when="@0.8.5.post1")
+    depends_on("py-torchaudio@2.6.0", type=["run"], when="@0.8.5.post1")
+    depends_on("py-torchvision@0.21.0", type=["run"], when="@0.8.5.post1")
 
     depends_on("py-pydantic@2.10.0:", type=["run"])
     depends_on("py-transformers@4.51.1:", type=["run"])
@@ -56,7 +60,9 @@ class PyVllm(PythonPackage, CudaPackage):
     depends_on("py-sentencepiece", type=["run"])
     depends_on("py-tiktoken@0.6.0:", type=["run"])
     depends_on("py-numba@0.61.2", type=["run"])
-    depends_on("py-fastapi@0.115.0:", type=["run"])
+    depends_on("py-fastapi@0.115.0:+all", type=["run"])
+    depends_on("py-partial-json-parser", type=["run"])
+    depends_on("py-prometheus-fastapi-instrumentator", type=["run"])
 
     variant("cuda", default=True, description="Use CUDA")
     conflicts("~cuda")

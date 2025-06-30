@@ -7,7 +7,7 @@ from spack.package import *
 
 
 class PyBlake3(PythonPackage):
-    """A fast serialization and validation library, with builtin support for JSON, MessagePack, YAML, and TOML."""
+    """Python bindings for the BLAKE3 cryptographic hash function"""
 
     pypi = "blake3/blake3-1.0.5.tar.gz"
 

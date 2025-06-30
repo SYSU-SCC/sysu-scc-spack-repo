@@ -2,16 +2,17 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+# from spack_repo.builtin.build_systems.python import PythonPackage
 
 from spack.package import *
 
 
 class PyGguf(PythonPackage):
-    """A fast serialization and validation library, with builtin support for JSON, MessagePack, YAML, and TOML."""
+    """This is a Python package for writing binary files in the GGUF (GGML Universal File) format."""
 
     pypi = "gguf/gguf-0.17.1.tar.gz"
 
-    license("BSD-3-Clause")
+    license("MIT")
 
     version(
         "0.17.1",

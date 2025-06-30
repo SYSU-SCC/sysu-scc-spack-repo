@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+# from spack_repo.builtin.build_systems.python import PythonPackage
 
 from spack.package import *
 
@@ -11,7 +12,7 @@ class PyXgrammar(PythonPackage):
 
     pypi = "xgrammar/xgrammar-0.1.18.tar.gz"
 
-    license("BSD-3-Clause")
+    license("Apache-2.0")
 
     version(
         "0.1.18",

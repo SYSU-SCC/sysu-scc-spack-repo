@@ -2,16 +2,17 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+# from spack_repo.builtin.build_systems.python import PythonPackage
 
 from spack.package import *
 
 
 class PyLlguidance(PythonPackage):
-    """A fast serialization and validation library, with builtin support for JSON, MessagePack, YAML, and TOML."""
+    """Bindings for the Low-level Guidance (llguidance) Rust library for use within Guidance"""
 
     pypi = "llguidance/llguidance-0.7.30.tar.gz"
 
-    license("BSD-3-Clause")
+    license("MIT")
 
     version(
         "0.7.30",
