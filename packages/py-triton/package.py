@@ -2,11 +2,11 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-# from spack_repo.builtin.build_systems.python import PythonPackage
+from spack.build_systems import python
+from spack.build_systems.python import PythonPackage
 
 import llnl.util.filesystem as fs
 
-from spack import build_systems
 from spack.package import *
 
 
@@ -73,11 +73,11 @@ class PyTriton(PythonPackage):
 
 
 # override pip install to use python subdirectory from parent directory
-class PythonPipBuilder(build_systems.python.PythonPipBuilder):
+class PythonPipBuilder(python.PythonPipBuilder):
     def install(self, pkg, spec, prefix):
         pip = spec["python"].command
         pip.add_default_arg("-m", "pip")
-        args = build_systems.python.PythonPipBuilder.std_args(pkg) + [f"--prefix={prefix}"]
+        args = python.PythonPipBuilder.std_args(pkg) + [f"--prefix={prefix}"]
         # build directory specified manually as additional argument to pip install
         args.append("./python")
         with fs.working_dir(self.build_directory):
