@@ -2,17 +2,21 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+# from spack_repo.builtin.build_systems.python import PythonPackage
+
 import llnl.util.filesystem as fs
 
-from spack import build_systems
+from spack_repo.builtin import build_systems
 from spack.package import *
 
 
 class PyTriton(PythonPackage):
     """A language and compiler for custom Deep Learning operations."""
+
     homepage = "https://github.com/triton-lang/triton"
     url = "https://github.com/triton-lang/triton/archive/refs/tags/v2.1.0.tar.gz"
     git = "https://github.com/triton-lang/triton.git"
+
     license("MIT")
 
     version("main", branch="main")
@@ -33,7 +37,6 @@ class PyTriton(PythonPackage):
 
     depends_on("py-filelock", type=("build", "run"))
     depends_on("zlib-api", type="link")
-
     conflicts("^openssl@3.3.0")
 
     # avoid bdist_whell.dist_info_dir problems:
@@ -44,7 +47,7 @@ class PyTriton(PythonPackage):
     # and https://github.com/pypa/setuptools/pull/4684
     patch("setup_v3.2.0.patch", when="@3.2.0 ^py-setuptools@70.1:")
 
-    def setup_build_environment(self, env) -> None:
+    def setup_build_environment(self, env: EnvironmentModifications) -> None:
         """Set environment variables used to control the build"""
         if self.spec.satisfies("%clang"):
             env.set("TRITON_BUILD_WITH_CLANG_LLD", "True")
@@ -70,8 +73,8 @@ class PyTriton(PythonPackage):
 
 
 # override pip install to use python subdirectory from parent directory
-class PythonPipBuilder(build_systems.python.PythonPipBuilder):
-    def install(self, pkg: PythonPackage, spec: Spec, prefix) -> None:
+class PythonPipBuilder(python.PythonPipBuilder):
+    def install(self, pkg, spec, prefix):
         pip = spec["python"].command
         pip.add_default_arg("-m", "pip")
         args = build_systems.python.PythonPipBuilder.std_args(pkg) + [f"--prefix={prefix}"]
