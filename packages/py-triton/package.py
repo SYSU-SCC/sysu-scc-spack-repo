@@ -6,7 +6,7 @@
 
 import llnl.util.filesystem as fs
 
-from spack_repo.builtin import build_systems
+from spack import build_systems
 from spack.package import *
 
 
@@ -47,7 +47,7 @@ class PyTriton(PythonPackage):
     # and https://github.com/pypa/setuptools/pull/4684
     patch("setup_v3.2.0.patch", when="@3.2.0 ^py-setuptools@70.1:")
 
-    def setup_build_environment(self, env: EnvironmentModifications) -> None:
+    def setup_build_environment(self, env) -> None:
         """Set environment variables used to control the build"""
         if self.spec.satisfies("%clang"):
             env.set("TRITON_BUILD_WITH_CLANG_LLD", "True")
@@ -73,7 +73,7 @@ class PyTriton(PythonPackage):
 
 
 # override pip install to use python subdirectory from parent directory
-class PythonPipBuilder(python.PythonPipBuilder):
+class PythonPipBuilder(build_systems.python.PythonPipBuilder):
     def install(self, pkg, spec, prefix):
         pip = spec["python"].command
         pip.add_default_arg("-m", "pip")
