@@ -41,6 +41,7 @@ class PyVllm(PythonPackage, CudaPackage):
     depends_on("py-torch@2.6.0", type=["build", "run"], when="@0.8.5.post1")
     depends_on("py-torchaudio@2.6.0", type=["run"], when="@0.8.5.post1")
     depends_on("py-torchvision@0.21.0", type=["run"], when="@0.8.5.post1")
+    depends_on("py-triton@3.2.0", type=["run"], when="@0.8.5.post1")
 
     depends_on("py-pydantic@2.10.0:", type=["run"])
     depends_on("py-transformers@4.51.1:", type=["run"])
