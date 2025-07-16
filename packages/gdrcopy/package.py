@@ -57,7 +57,7 @@ class Gdrcopy(MakefilePackage, CudaPackage):
         ff = FileFilter("tests/Makefile")
         ff.filter(
             '$(NVCC)  -o $@ $^ $(LDFLAGS) -lgdrapi -lcuda',
-            '$(LINK.cc)  -o $@ $^ $(LDFLAGS) -lgdrapi -lcuda -lcudart',
+            '$(LINK.cc)  -o $@ $^ $(LDFLAGS) -lgdrapi -lcuda -lcudart_static',
             string=True
         )
 
