@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-from spack_repo.builtin.build_systems.cmake import CmakePackage
+from spack_repo.builtin.build_systems.cmake import CMakePackage
 
 from spack.package import *
 
