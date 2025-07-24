@@ -5,6 +5,8 @@
 
 import glob
 
+from spack_repo.builtin.build_systems.makefile import MakefilePackage
+
 from spack import *
 
 
@@ -54,7 +56,7 @@ class GpgpuSim(MakefilePackage):
         mkdirp(join_path(prefix, "gpgpu-sim_distribution"))
         install_tree(self.stage.source_path, join_path(prefix, "gpgpu-sim_distribution"))
 
-    def setup_build_environment(self, env):
+    def setup_build_environment(self, env: EnvironmentModifications) -> None:
         env.set("CUDA_INSTALL_PATH", self.spec["cuda"].prefix)
         env.set("GPGPUSIM_ROOT", self.stage.source_path)
         if self.version == Version("4.0.1"):
