@@ -1,9 +1,0 @@
-spack:
-  specs:
-    - ca-certificates-mozilla
-    - glibc
-    - gmake
-    - binutils
-    - python
-    - file
-    - patch
