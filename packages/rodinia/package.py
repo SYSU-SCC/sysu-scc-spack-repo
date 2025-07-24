@@ -6,7 +6,7 @@
 from spack_repo.builtin.build_systems.cuda import CudaPackage
 from spack_repo.builtin.build_systems.makefile import MakefilePackage
 
-from spack import *
+from spack.package import *
 
 
 class Rodinia(MakefilePackage, CudaPackage):

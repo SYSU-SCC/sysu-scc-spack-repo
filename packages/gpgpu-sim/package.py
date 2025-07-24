@@ -7,7 +7,7 @@ import glob
 
 from spack_repo.builtin.build_systems.makefile import MakefilePackage
 
-from spack import *
+from spack.package import *
 
 
 class GpgpuSim(MakefilePackage):
