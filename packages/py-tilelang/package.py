@@ -38,7 +38,7 @@ class PyTilelang(PythonPackage, CudaPackage, ROCmPackage):
         depends_on("cmake@3.26:")
         depends_on("py-packaging")
         depends_on("py-setuptools@61:")
-        # depends_on("py-wheel") # inherited if `pip`` is the build system
+        # depends_on("py-wheel") # inherited if `pip` is the build system
 
         # https://github.com/tile-ai/tilelang/blob/v0.1.5/requirements-build.txt
         depends_on("py-build")
