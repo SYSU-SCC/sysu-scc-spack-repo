@@ -14,10 +14,7 @@ class PyXgrammar(PythonPackage):
 
     license("Apache-2.0")
 
-    version(
-        "0.1.18",
-        sha256="a0438a0f9262fff1d0e4f184268eb759f094243edce92b67eb7aa5f245c47471",
-    )
+    version("0.1.21", sha256="2ce1e81417ff46aa7ef26d8c0627275cb20dd1f2e8ead5bb261aecde1cc8ba57")
 
     depends_on("py-pydantic", type=["build", "run"])
     depends_on("py-transformers@4.38.0:", type=["build", "run"])
