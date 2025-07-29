@@ -76,7 +76,7 @@ class PyVllm(PythonPackage, CudaPackage):
 
         depends_on("py-llguidance@0.7.11:0.7")
 
-        depends_on("py-distcache") # 5.6.3
+        depends_on("py-diskcache") # 5.6.3
 
         depends_on("py-xgrammar") # 0.1.21
         depends_on("py-typing-extensions@4.10:")
