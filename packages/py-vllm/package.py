@@ -44,10 +44,10 @@ class PyVllm(PythonPackage, CudaPackage):
         depends_on("py-setuptools@77.0.3:79")
         depends_on("py-setuptools-scm@8:")
         # depends_on("py-wheel") # inherited if `pip` is the build system
-        depends_on("py-jinja2@3.1.6:")
         depends_on("py-regex")
 
     with default_args(type=("build", "run")):
+        depends_on("py-jinja2@3.1.6:")
         depends_on("py-torch+custom-protobuf")
 
     with default_args(type="run"):
@@ -76,6 +76,8 @@ class PyVllm(PythonPackage, CudaPackage):
 
         depends_on("py-llguidance@0.7.11:0.7")
 
+        depends_on("py-distcache") # 5.6.3
+
         depends_on("py-xgrammar") # 0.1.21
         depends_on("py-typing-extensions@4.10:")
         depends_on("py-filelock") # 3.16.1
@@ -84,7 +86,13 @@ class PyVllm(PythonPackage, CudaPackage):
         depends_on("py-msgspec")
         depends_on("py-gguf@0.13.0:")
 
+        depends_on("py-einops")
+        depends_on("py-compressed-tensors@0.10.2")
+
         depends_on("py-cloudpickle")
+
+        depends_on("py-cbor2")
+        depends_on("py-pybase64")
 
         depends_on("py-numba")
         depends_on("py-torchaudio")
@@ -97,3 +105,11 @@ class PyVllm(PythonPackage, CudaPackage):
     def setup_build_environment(self, env: EnvironmentModifications) -> None:
         # If oom error, try lowering the number of jobs with `spack install -j`
         env.set("MAX_JOBS", str(make_jobs))
+    
+    def patch(self):
+        f = FileFilter("CMakeLists.txt")
+        f.filter(
+            "PYTHONPATH=$PYTHONPATH",
+            "PYTHONPATH=$ENV{PYTHONPATH}",
+            string=True,
+        )
