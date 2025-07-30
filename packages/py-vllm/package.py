@@ -61,7 +61,7 @@ class PyVllm(PythonPackage, CudaPackage):
         depends_on("py-tqdm")
         depends_on("py-blake3")
         depends_on("py-py-cpuinfo")
-        depends_on("py-transformers@4.53:") # 4.53.2
+        depends_on("py-transformers@4.53.2:")
         depends_on("py-huggingface-hub@0.33.0:")
         depends_on("py-tokenizers@0.21:") # 0.21.1
         depends_on("protobuf")
