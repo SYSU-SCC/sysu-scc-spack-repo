@@ -8,11 +8,11 @@ from spack.package import *
 
 
 class PyTypesPyyaml(PythonPackage):
-    """CBOR (de)serializer with extensive tag support"""
+    """Typing stubs for PyYAML"""
 
     pypi = "types-PyYAML/types_pyyaml-6.0.12.20250516.tar.gz"
 
-    license("MIT")
+    license("Apache-2.0")
 
     version(
         "6.0.12.20250516",

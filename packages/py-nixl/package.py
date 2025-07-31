@@ -14,7 +14,7 @@ class PyNixl(PythonPackage, CudaPackage):
     homepage = "https://github.com/ai-dynamo/nixl"
     url = "https://github.com/ai-dynamo/nixl/archive/refs/tags/0.4.1.tar.gz"
 
-    license("MIT")
+    license("Apache-2.0")
 
     version("0.4.1", sha256="54672c6d4b0a303690880526c2dbff4ddc45ad7b8321ca602240a316abd86508")
 
