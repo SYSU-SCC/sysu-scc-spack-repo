@@ -32,5 +32,6 @@ class PyOrjson(PythonPackage):
             depends_on("rust@1.72:")
             depends_on("python@3.8:")
             depends_on("py-maturin@1")
-        with when("@:3.10.3"):
-            depends_on("python@:3.12")
+
+    with when("@:3.10.3"):
+        depends_on("python@:3.12")
