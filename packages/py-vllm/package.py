@@ -33,6 +33,7 @@ class PyVllm(PythonPackage, CudaPackage):
         depends_on("py-torchaudio@2.7.1", type=["run"])
         depends_on("py-torchvision@0.22.1", type=["run"])
         depends_on("python@:3.12", type=["build", "run"])
+        depends_on("py-triton@3.3.1", type=["build", "run"])
 
     with default_args(type="build"):
         # https://github.com/vllm-project/vllm/blob/v0.10.0/requirements/build.txt
