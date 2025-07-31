@@ -43,4 +43,6 @@ class PyTriton(PythonPackage):
         if self.spec.satisfies("%clang"):
             env.set("TRITON_BUILD_WITH_CLANG_LLD", "True")
 
-    build_directory = "python"
+    @property
+    def build_directory(self):
+        return "." if self.spec.satisfies("@3.4.0:") else "python"
