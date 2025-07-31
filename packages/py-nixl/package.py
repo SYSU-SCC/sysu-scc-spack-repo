@@ -32,6 +32,17 @@ class PyNixl(PythonPackage, CudaPackage):
         depends_on("py-torch+cuda")
         depends_on("py-numpy")
 
-    depends_on("ucx+cuda", type=["build", "link", "run"])
+    with default_args(type=["build", "link", "run"]):
+        depends_on("ucx+cuda")
 
     requires("+cuda")
+
+    def config_settings(self, spec, prefix):
+        settings = {
+            "setup-args": {
+                "-Ducx_path": spec["ucx"].prefix,
+                "-Dcudapath_inc": spec["cuda"].prefix.include,
+                "-Dcudapath_lib": spec["cuda"].prefix.lib64,
+            },
+        }
+        return settings
