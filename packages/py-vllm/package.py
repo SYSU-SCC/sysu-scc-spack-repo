@@ -103,6 +103,7 @@ class PyVllm(PythonPackage, CudaPackage):
 
     patch(
         "https://github.com/vllm-project/vllm/pull/21804.patch",
+        sha256="4feb7a0eec684a005afb58ace2415d850dd8ce5764f9f694fe6fc5c4995b061c",
         when="@0.9:"
     )
 
