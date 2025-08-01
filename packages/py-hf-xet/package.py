@@ -10,7 +10,7 @@ from spack.package import *
 class PyHfXet(PythonPackage):
     """Fast transfer of large files with the Hugging Face Hub."""
 
-    pypi = "hf-xet/hf-xet-1.1.5.tar.gz"
+    pypi = "hf-xet/hf_xet-1.1.5.tar.gz"
 
     license("Apache-2.0")
 
