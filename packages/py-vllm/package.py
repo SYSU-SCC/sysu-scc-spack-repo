@@ -101,14 +101,11 @@ class PyVllm(PythonPackage, CudaPackage):
     variant("cuda", default=True, description="Use CUDA")
     conflicts("~cuda")
 
+    patch(
+        "https://github.com/vllm-project/vllm/pull/21804.patch",
+        when="@0.9:"
+    )
+
     def setup_build_environment(self, env: EnvironmentModifications) -> None:
         # If oom error, try lowering the number of jobs with `spack install -j`
         env.set("MAX_JOBS", str(make_jobs))
-    
-    def patch(self):
-        f = FileFilter("CMakeLists.txt")
-        f.filter(
-            "PYTHONPATH=$PYTHONPATH",
-            "PYTHONPATH=$ENV{PYTHONPATH}",
-            string=True,
-        )
