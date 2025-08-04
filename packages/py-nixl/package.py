@@ -16,7 +16,6 @@ class PyNixl(PythonPackage, CudaPackage):
 
     license("Apache-2.0")
 
-    depends_on("c")
     depends_on("cxx")
 
     version("0.4.1", sha256="54672c6d4b0a303690880526c2dbff4ddc45ad7b8321ca602240a316abd86508")
