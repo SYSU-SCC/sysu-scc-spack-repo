@@ -29,6 +29,10 @@ class PyNixl(PythonPackage, CudaPackage):
         depends_on("py-pyyaml")
         depends_on("py-types-pyyaml")
         depends_on("py-pytest")
+
+        # for its subproject abseil-cpp
+        depends_on("pkg-config")
+        depends_on("cmake")
     
     with default_args(type=["build", "run"]):
         # https://github.com/ai-dynamo/nixl/blob/0.4.1/pyproject.toml
