@@ -20,8 +20,13 @@ class EtcdCppApiv3(CMakePackage):
     version("master", branch="master")
     version("0.15.4", sha256="4516ecfa420826088c187efd42dad249367ca94ea6cdfc24e3030c3cf47af7b4")
 
-    depends_on("boost", type=["build", "link"])
+    depends_on("boost")
     depends_on("openssl", type=["build", "link"])
-    depends_on("grpc@:1.64.0", type=["build", "link"]) # Compilation error: GPR_ASSERT not found
+    depends_on("grpc", type=["build", "link"])
     depends_on("protobuf", type=["build", "link"])
     depends_on("cpprestsdk", type=["build", "link"])
+
+    patch( # Latest GRPC >= 2.66 has dropped GRPC_ASSERT macro
+        "https://github.com/etcd-cpp-apiv3/etcd-cpp-apiv3/commit/216b86f8d763acf88e4ed7265f983b57c12da2df.patch",
+        sha256="9a882c50ce9105eaad6214777bf44d6302ae3c5fa6800fa7c9d58a611bb2f420",
+    )
