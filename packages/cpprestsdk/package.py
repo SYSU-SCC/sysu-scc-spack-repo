@@ -36,7 +36,7 @@ class Cpprestsdk(CMakePackage):
     # It was removed in Boost 1.87.
     # https://www.boost.org/doc/libs/1_87_0/doc/html/boost_asio/history.html
     depends_on(
-        "boost@1.69.0:1.87+random+chrono+locale+filesystem+system+exception+regex+thread+date_time"
+        "boost@1.69.0:1.86+random+chrono+locale+filesystem+system+exception+regex+thread+date_time"
     )
     depends_on("openssl")
 
